@@ -127,3 +127,18 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+.sqlite3
+# Byte-compiled / optimized / DLL files
+__pycache__
+
+
+
+# User-specific stuff:
+.vscode/
+.idea/
+requirements.freeze.txt
+deb/*.deb
+.pylintrc
+requirements-pylint.txt
+
+/__init__.py
