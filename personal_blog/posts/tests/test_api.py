@@ -74,26 +74,18 @@ class PostApiTestCase(APITestCase):
         self.assertEqual(status.HTTP_404_NOT_FOUND, deleted_post.status_code)
 
     def test_searching(self):
-
         url = reverse('post-list')
-
         response = self.client.get(url, data={'search': 'test-1'})
-        # print(response.data)
         serializer_data = PostsSerializer([self.post_1, ], many=True).data
         self.assertEqual(response.data, serializer_data)
 
-    # def test_filtering(self):
-    #
-    #     another_user = User.objects.create(username='another_user')
-    #     self.client.force_login(another_user)
-    #     post_3 = Post.objects.create(author=another_user, title='Test-3', content='test-3')
-    #     url = reverse('post-list')
-    #
-    #     response = self.client.get(url, data={'filter': {'author': another_user}})
-    #     print(response.data)
-    #     serializer_data = PostsSerializer([post_3, ], many=True).data
-    #     self.assertEqual(response.data, serializer_data)
+    def test_filtering(self):
 
-    # def test_update(self):
-    #     self.client.force_login(self.user)
-    #     url = reverst('')
+        another_user = User.objects.create(username='another_user')
+        self.client.force_login(another_user)
+        post_3 = Post.objects.create(author=another_user, title='Test-3', content='test-3')
+        url = reverse('post-list')
+
+        response = self.client.get(url, data={'author': another_user.id})
+        serializer_data = PostsSerializer([post_3, ], many=True).data
+        self.assertEqual(response.data, serializer_data)

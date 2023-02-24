@@ -11,7 +11,7 @@ class PostViewSet(ModelViewSet):
     queryset = Post.objects.all()
     serializer_class = PostsSerializer
     filter_backends = [DjangoFilterBackend, SearchFilter, OrderingFilter]
-    filterset_fields = ['author', 'create_date']
+    filterset_fields = ['author', 'title']
     search_fields = ['content', 'title']
     ordering_fields = ['create_date', 'rating']
     permission_classes = [IsAuthenticatedOrReadOnly, ]
